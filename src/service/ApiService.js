@@ -35,6 +35,10 @@ export function call(api, method, request) {
     });
 }
 
+export function signup(userDTO) {
+    return call("/auth/signup", "POST", userDTO);
+}
+
 export function signin(userDTO) {
     return call("/auth/signin", "POST", userDTO)
     .then((response) => {
@@ -45,6 +49,11 @@ export function signin(userDTO) {
             window.location.href ="/";
         }
     });
+}
+
+export function socialLogin(provider) {
+    const frontendUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = API_BASE_URL + "/auth/authorize/" + provider + "?redirect_url+" + frontendUrl;
 }
 
 export function signout() {
